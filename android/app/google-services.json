@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "796307064697",
+    "project_id": "review-bhai-e5fb1",
+    "storage_bucket": "review-bhai-e5fb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796307064697:android:124cb772333320933091a8",
+        "android_client_info": {
+          "package_name": "com.example.reviewbahi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796307064697-7nc5etr64opn0bk9vjisofiduv9ldsav.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.reviewbahi",
+            "certificate_hash": "019bc48babb28a171e8438dd3514774f9dbbf89b"
+          }
+        },
+        {
+          "client_id": "796307064697-trgvrgf1qaso8fm0669r42patpn9lnmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnpngLqSocRK9A8RmVjaY6AE1EIi2xfhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796307064697-trgvrgf1qaso8fm0669r42patpn9lnmv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
