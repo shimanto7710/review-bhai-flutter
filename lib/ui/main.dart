@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:reviewbahi/core/MyColor.dart';
 
 
 import 'home/home.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     runApp(
       new MaterialApp(
         title: 'review-bhai',
+        theme: ThemeData(primaryColor: CustomColors.primaryColor, accentColor: Colors.yellow,fontFamily: 'Constantia'),
         initialRoute: SplashScreenView.routeName,
         routes: {
           SplashScreenView.routeName: (context) => SplashScreenView(),
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
           // HomePage.routeName: (context) => HomePage(),
           // ReviewDetails.routeName: (context) => ReviewDetails()
         },
-        theme: ThemeData(primaryColor: Colors.green, accentColor: Colors.yellow),
+
         debugShowCheckedModeBanner: false,
         // home: SplashScreenView(),
       ),

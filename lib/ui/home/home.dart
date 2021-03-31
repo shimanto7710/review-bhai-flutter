@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       currentIndex = index;
     });
   }
-  final _scrollController = ScrollController();
+
   final List<Widget> _children = [
     ExploreFragment(),
     QueAskFragment(),
@@ -39,6 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeFragment()
   ];
 
+  //appbar search
+  final _scrollController = ScrollController();
   TextEditingController _searchQueryController = TextEditingController();
   bool _isSearching = false;
   String searchQuery = "Search query";
@@ -185,154 +187,162 @@ class _HomeScreenState extends State<HomeScreen> {
         // ignore: missing_return
         builder: (BuildContext context, HomeState state) {
           return Scaffold(
-              appBar: ScrollAppBar(
-                brightness: Brightness.light,
-                elevation: 2,
-                backgroundColor: Colors.white,
-                leading: _isSearching
-                    ? IconButton(
-                        icon: const Icon(Icons.arrow_back_ios,
-                            color: Colors.black),
-                        onPressed: () {
-                          // if (_searchQueryController == null ||
-                          //     _searchQueryController.text.isEmpty) {
-                          //   Navigator.pop(context);
-                          //   return;
-                          // }
-                          Navigator.pop(context);
-                          _clearSearchQuery();
-                        },
-                      )
-                    : Container(
-                        margin: EdgeInsets.only(left: 10),
-                        alignment: Alignment.center,
-                        width: 40,
-                        height: 40,
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.black,
-                        ),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: CustomColors.iconBgColor,
-                        )),
-                title: _isSearching
-                    ? _buildSearchField()
-                    : Row(
-                        children: [
-                          Spacer(),
-                          Text(
-                            "Home",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          Spacer()
-                        ],
-                      ),
-                actions: _buildActions(),
-                controller: _scrollController,
-              ),
+            // appBar: _appBar(),
+            // bottomNavigationBar: Container(
+            //   height: 80,
+            //   child: bottomNavigation(size),
+            // ),
+            body: Stack(children: [
+              _children[currentIndex],
+              bottomNavigation(size),
 
-              bottomNavigationBar: Container(
-                height: 80,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      child: Container(
-                        width: size.width,
-                        height: 80,
-                        child: Stack(
-                          overflow: Overflow.visible,
-                          children: [
-                            CustomPaint(
-                              size: Size(size.width, 80),
-                              painter: BNBCustomPainter(),
-                            ),
-                            Center(
-                              heightFactor: 0.6,
-                              child: FloatingActionButton(
-                                  backgroundColor: currentIndex == 4
-                                      ? CustomColors.primaryColor
-                                      : Colors.white,
-                                  child: Icon(
-                                    Icons.home,
-                                    color: currentIndex == 4
-                                        ? Colors.white
-                                        : Colors.grey.shade400,
-                                  ),
-                                  elevation: 0.1,
-                                  onPressed: () {
-                                    setBottomBarIndex(4);
-                                  }),
-                            ),
-                            Container(
-                              width: size.width,
-                              height: 80,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.explore,
-                                      color: currentIndex == 0
-                                          ? CustomColors.primaryColor
-                                          : Colors.grey.shade400,
-                                    ),
-                                    onPressed: () {
-                                      setBottomBarIndex(0);
-                                    },
-                                    splashColor: Colors.white,
-                                  ),
-                                  IconButton(
-                                      icon: Icon(
-                                        Icons.restaurant_menu,
-                                        color: currentIndex == 1
-                                            ? CustomColors.primaryColor
-                                            : Colors.grey.shade400,
-                                      ),
-                                      onPressed: () {
-                                        setBottomBarIndex(1);
-                                      }),
-                                  Container(
-                                    width: size.width * 0.20,
-                                  ),
-                                  IconButton(
-                                      icon: Icon(
-                                        Icons.bookmark,
-                                        color: currentIndex == 2
-                                            ? CustomColors.primaryColor
-                                            : Colors.grey.shade400,
-                                      ),
-                                      onPressed: () {
-                                        setBottomBarIndex(2);
-                                      }),
-                                  IconButton(
-                                      icon: Icon(
-                                        Icons.notifications,
-                                        color: currentIndex == 3
-                                            ? CustomColors.primaryColor
-                                            : Colors.grey.shade400,
-                                      ),
-                                      onPressed: () {
-                                        setBottomBarIndex(3);
-                                      }),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              body: Snap(
-                  controller: _scrollController.appBar,
-                  child: _children[currentIndex]));
+            ],),
+          );
         },
       ),
+    );
+  }
+
+  Widget bottomNavigation(Size size) {
+    return Stack(
+      children: [
+        Positioned(
+          bottom: 0,
+          left: 0,
+          child: Container(
+            width: size.width,
+            height: 80,
+            child: Stack(
+              overflow: Overflow.visible,
+              children: [
+                CustomPaint(
+                  size: Size(size.width, 80),
+                  painter: BNBCustomPainter(),
+                ),
+                Center(
+                  heightFactor: 0.6,
+                  child: FloatingActionButton(
+                      backgroundColor: currentIndex == 4
+                          ? CustomColors.primaryColor
+                          : Colors.white,
+                      child: Icon(
+                        Icons.home,
+                        color: currentIndex == 4
+                            ? Colors.white
+                            : Colors.grey.shade400,
+                      ),
+                      elevation: 0.1,
+                      onPressed: () {
+                        setBottomBarIndex(4);
+                      }),
+                ),
+                Container(
+                  width: size.width,
+                  height: 80,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.explore,
+                          color: currentIndex == 0
+                              ? CustomColors.primaryColor
+                              : Colors.grey.shade400,
+                        ),
+                        onPressed: () {
+                          setBottomBarIndex(0);
+                        },
+                        splashColor: Colors.white,
+                      ),
+                      IconButton(
+                          icon: Icon(
+                            Icons.question_answer,
+                            color: currentIndex == 1
+                                ? CustomColors.primaryColor
+                                : Colors.grey.shade400,
+                          ),
+                          onPressed: () {
+                            setBottomBarIndex(1);
+                          }),
+                      Container(
+                        width: size.width * 0.20,
+                      ),
+                      IconButton(
+                          icon: Icon(
+                            Icons.add_circle,
+                            color: currentIndex == 2
+                                ? CustomColors.primaryColor
+                                : Colors.grey.shade400,
+                          ),
+                          onPressed: () {
+                            setBottomBarIndex(2);
+                          }),
+                      IconButton(
+                          icon: Icon(
+                            Icons.notifications,
+                            color: currentIndex == 3
+                                ? CustomColors.primaryColor
+                                : Colors.grey.shade400,
+                          ),
+                          onPressed: () {
+                            setBottomBarIndex(3);
+                          }),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  ScrollAppBar _appBar() {
+    return ScrollAppBar(
+      brightness: Brightness.light,
+      elevation: 2,
+      backgroundColor: Colors.white,
+      leading: _isSearching
+          ? IconButton(
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+              onPressed: () {
+                // if (_searchQueryController == null ||
+                //     _searchQueryController.text.isEmpty) {
+                //   Navigator.pop(context);
+                //   return;
+                // }
+                Navigator.pop(context);
+                _clearSearchQuery();
+              },
+            )
+          : Container(
+              margin: EdgeInsets.only(left: 10),
+              alignment: Alignment.center,
+              width: 40,
+              height: 40,
+              child: Icon(
+                Icons.person,
+                color: Colors.black,
+              ),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: CustomColors.iconBgColor,
+              )),
+      title: _isSearching
+          ? _buildSearchField()
+          : Row(
+              children: [
+                Spacer(),
+                Text(
+                  "Home",
+                  style: TextStyle(color: Colors.black),
+                ),
+                Spacer()
+              ],
+            ),
+      actions: _buildActions(),
+      controller: _scrollController,
     );
   }
 }

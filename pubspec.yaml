@@ -38,7 +38,8 @@ dependencies:
   pinput: ^1.0.0
 
   flutter_search_bar: ^2.1.0
- 
+  infinite_view_pager: ^1.0.0
+  dots_indicator: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -53,4 +54,10 @@ flutter:
   assets:
     - assets/imgs/
     - assets/icons/
+
+
+  fonts:
+    - family: Constantia
+      fonts:
+        - asset: assets/fonts/Constantia-constan.ttf
 
