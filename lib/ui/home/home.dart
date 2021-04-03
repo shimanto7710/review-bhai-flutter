@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeBloc _bloc;
   var screenWidth;
 
-  int currentIndex = 0;
+  int currentIndex = 4;
 
   setBottomBarIndex(index) {
     setState(() {
@@ -171,6 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
           statusBarColor: Colors.white,
@@ -193,7 +194,8 @@ class _HomeScreenState extends State<HomeScreen> {
             //   child: bottomNavigation(size),
             // ),
             body: Stack(children: [
-              _children[currentIndex],
+
+              _children[currentIndex]  ,
               bottomNavigation(size),
 
             ],),
@@ -202,6 +204,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+
 
   Widget bottomNavigation(Size size) {
     return Stack(
@@ -269,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       IconButton(
                           icon: Icon(
-                            Icons.add_circle,
+                            Icons.bookmark,
                             color: currentIndex == 2
                                 ? CustomColors.primaryColor
                                 : Colors.grey.shade400,

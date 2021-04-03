@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reviewbahi/core/MyColor.dart';
+import 'package:reviewbahi/ui/detail_info/detail_info_screen.dart';
 import 'package:reviewbahi/ui/home/home.dart';
 import 'package:reviewbahi/ui/login_pin/InputPinScreen.dart';
 
@@ -46,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -64,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      SizedBox(height: size.height/10,),
                       Container(
                         margin: EdgeInsets.only(right: screenWidth / 5),
                         child: SvgPicture.asset("assets/icons/otp_send.svg"),
@@ -181,6 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: (state is LoadingState)
                                     ? MaterialButton(
                                         shape: RoundedRectangleBorder(
+
                                             borderRadius:
                                                 BorderRadius.circular(5.0)),
                                         color: CustomColors.primaryColor,
@@ -321,7 +325,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+          builder: (context) => DetailInfoScreen(),
         ));
   }
 

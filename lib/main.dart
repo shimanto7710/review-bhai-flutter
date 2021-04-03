@@ -1,14 +1,22 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:reviewbahi/core/MyColor.dart';
+import 'package:reviewbahi/ui/ask_detail_screen/ask_detail_screen.dart';
+import 'package:reviewbahi/ui/detail_info/detail_info_screen.dart';
+import 'package:reviewbahi/ui/filter_screen/filter_screen.dart';
+import 'package:reviewbahi/ui/food_item/food_item_screen.dart';
+import 'package:reviewbahi/ui/profile_screen/profile_screen.dart';
+import 'package:reviewbahi/ui/resturant_screen/restaurant_screen.dart';
+import 'package:reviewbahi/ui/review_detail_screen/review_detail_screen.dart';
+import 'package:reviewbahi/ui/write_que_screen/write_que_screen.dart';
+import 'package:reviewbahi/ui/write_review_screen/write_review_screen.dart';
 
 
-import 'home/home.dart';
-import 'login/loginScreen.dart';
-import 'login_pin/InputPinScreen.dart';
+import 'ui/home/home.dart';
+import 'ui/login/loginScreen.dart';
+import 'ui/login_pin/InputPinScreen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,12 +31,21 @@ class MyApp extends StatelessWidget {
     runApp(
       new MaterialApp(
         title: 'review-bhai',
-        theme: ThemeData(primaryColor: CustomColors.primaryColor, accentColor: Colors.yellow,fontFamily: 'Constantia'),
+        theme: ThemeData(primaryColor: CustomColors.primaryColor, accentColor: CustomColors.accentColor,fontFamily: 'Constantia'),
         initialRoute: SplashScreenView.routeName,
         routes: {
           SplashScreenView.routeName: (context) => SplashScreenView(),
           LoginPage.routeName: (context) => LoginPage(),
+          ReviewDetailScreen.routeName: (context) => ReviewDetailScreen(),
+          AskDetailScreen.routeName: (context) => AskDetailScreen(),
+          FilterScreen.routeName: (context) => FilterScreen(),
+          DetailInfoScreen.routeName: (context) => DetailInfoScreen(),
           HomeScreen.routeName: (context) => HomeScreen(),
+          FoodItemScreen.routeName: (context) => FoodItemScreen(),
+          ProfileScreen.routeName: (context) => ProfileScreen(),
+          RestaurantScreen.routeName: (context) => RestaurantScreen(),
+          WriteQueScreen.routeName: (context) => WriteQueScreen(),
+          WriteReviewScreen.routeName: (context) => WriteReviewScreen(),
           PinPutView.routeName: (context) => PinPutView(verificationId: "",resendToken: 00,phoneNumber: "",),
           // HomePage.routeName: (context) => HomePage(),
           // ReviewDetails.routeName: (context) => ReviewDetails()

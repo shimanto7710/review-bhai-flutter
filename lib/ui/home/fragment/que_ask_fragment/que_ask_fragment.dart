@@ -2,6 +2,10 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reviewbahi/ui/ask_detail_screen/ask_detail_screen.dart';
+import 'package:reviewbahi/ui/filter_screen/filter_screen.dart';
+import 'package:reviewbahi/ui/profile_screen/profile_screen.dart';
+import 'package:reviewbahi/ui/write_que_screen/write_que_screen.dart';
 import 'package:scroll_app_bar/scroll_app_bar.dart';
 import 'package:reviewbahi/core/MyColor.dart';
 import 'package:reviewbahi/ui/home/fragment/que_ask_fragment/bloc/que_ask_bloc.dart';
@@ -66,16 +70,48 @@ class _QueAskFragmentState extends State<QueAskFragment> {
               controller: _scrollController.appBar,
               child: Container(
                 margin: EdgeInsets.only(bottom: 70),
-                child: Container(
-                  color: Colors.black12,
-                  child: new ListView.builder(
-                    controller: _scrollController,
-                    itemCount: 10,
-                    // ignore: missing_return
-                    itemBuilder: (BuildContext context, int index) {
-                      return listItem(context);
-                    },
-                  ),
+                child: ListView(
+                  children: [
+
+                    InkWell(
+                      onTap: (){
+                        _navigateToAScreen(WriteQueScreen());
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(left: 16,top: 10,bottom: 10,right: 16),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: 8),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(200),
+                                child: Image.asset(
+                                  'assets/imgs/james.jpg',
+                                  width: 50.0,
+                                  height: 50,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            Text("Write a Question.",style: TextStyle(fontSize: 18),)
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      color: Colors.black12,
+                      child: new ListView.builder(
+                        shrinkWrap: true,
+                        controller: _scrollController,
+                        itemCount: 10,
+                        // ignore: missing_return
+                        itemBuilder: (BuildContext context, int index) {
+                          return listItem(context);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -87,95 +123,104 @@ class _QueAskFragmentState extends State<QueAskFragment> {
     String des =
         "পাঠাও ফুডে আগামি ১ সপ্তাহ ব্যাপী চলবে ডাবল ডাবল কাচ্চির উৎসব। আগামিকাল থেকে পাচ্ছেন ২৫০ টাকার কাচ্চির প্যাকেজের সাথে আরও ২৫০ টাকার কাচ্চি ফ্রি। আর দেরী না করে পাঠাও - এ অর্ডার করুন সেরা স্বাদের কাচ্চির ২৫০ টাকার প্যাকেজ।";
     final Size size = MediaQuery.of(context).size;
-    return Container(
-      margin: EdgeInsets.only(top: 5),
-      color: Colors.white,
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(right: 8),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(200),
-                    child: Image.asset(
-                      'assets/imgs/james.jpg',
-                      width: 50.0,
-                      height: 50,
-                      fit: BoxFit.fill,
+    return InkWell(
+      onTap: _navigateToAskDetailScreen,
+      child: Container(
+        margin: EdgeInsets.only(top: 5),
+        color: Colors.white,
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: (){_navigateToAScreen(ProfileScreen());},
+                    child: Container(
+                      margin: EdgeInsets.only(right: 8),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(200),
+                        child: Image.asset(
+                          'assets/imgs/james.jpg',
+                          width: 50.0,
+                          height: 50,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 15),
-                    child: Wrap(
-                      children: [
-                        Text("James Rodriguez",
-                            style: TextStyle(
-                                fontSize: 18, color: CustomColors.fontDark)),
-                        Text(" asked a question.",
-                            style: TextStyle(
-                                fontSize: 18, color: CustomColors.fontLight)),
-                      ],
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 15),
+                      child: Wrap(
+                        children: [
+                          InkWell(
+                            onTap: (){_navigateToAScreen(ProfileScreen());},
+                            child: Text("James Rodriguez",
+                                style: TextStyle(
+                                    fontSize: 18, color: CustomColors.fontDark)),
+                          ),
+                          Text(" asked a question.",
+                              style: TextStyle(
+                                  fontSize: 18, color: CustomColors.fontLight)),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  child: Icon(
-                    Icons.more_vert,
-                    color: CustomColors.iconColorOnWhite,
+                  Container(
+                    child: Icon(
+                      Icons.more_vert,
+                      color: CustomColors.iconColorOnWhite,
+                    ),
+                    height: 20,
+                    width: 20,
                   ),
-                  height: 20,
-                  width: 20,
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(
-              margin: EdgeInsets.only(left: 16, right: 16),
-              child: Text(
-                "Sultan's Dine-এ চলছে অফারের উৎসব। এই বসন্তে সংযোজন হল আরও একটি ধামাকা অফার।",
-                style: TextStyle(color: CustomColors.fontDark, fontSize: 15),
-              )),
-          Container(
-              margin: EdgeInsets.only(left: 16, right: 16),
-              child: RichText(
-                textAlign: TextAlign.left,
-                text: TextSpan(
-                  style: DefaultTextStyle.of(context).style,
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: (des.length > desLength)
-                            ? des.substring(0, desLength)
-                            : des,
-                        style: TextStyle(
-                            color: CustomColors.fontDark, fontSize: 15)),
-                    TextSpan(
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          print("on resend click");
-                        },
-                      text: (des.length > desLength) ? "...show more" : "",
-                      style:
-                          TextStyle(color: CustomColors.fontDark, fontSize: 15),
-                    ),
-                  ],
-                ),
-              )),
-          Container(
-            margin: EdgeInsets.only(top: 8),
-            height: 200,
-            width: size.width,
-            child: _imagePager(),
-          ),
-          // Container(width: size.width,height: 1,color: Colors.black12,),
-          Container(
-              margin: EdgeInsets.only(left: 10), child: _reactionWidget()),
-        ],
+            Container(
+                margin: EdgeInsets.only(left: 16, right: 16),
+                child: Text(
+                  "Sultan's Dine-এ চলছে অফারের উৎসব। এই বসন্তে সংযোজন হল আরও একটি ধামাকা অফার।",
+                  style: TextStyle(color: CustomColors.fontDark, fontSize: 15),
+                )),
+            Container(
+                margin: EdgeInsets.only(left: 16, right: 16),
+                child: RichText(
+                  textAlign: TextAlign.left,
+                  text: TextSpan(
+                    style: DefaultTextStyle.of(context).style,
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: (des.length > desLength)
+                              ? des.substring(0, desLength)
+                              : des,
+                          style: TextStyle(
+                              color: CustomColors.fontDark, fontSize: 15)),
+                      TextSpan(
+                        // recognizer: TapGestureRecognizer()
+                        //   ..onTap = () {
+                        //     print("on resend click");
+                        //   },
+                        text: (des.length > desLength) ? "...show more" : "",
+                        style:
+                            TextStyle(color: CustomColors.fontDark, fontSize: 15),
+                      ),
+                    ],
+                  ),
+                )),
+            Container(
+              margin: EdgeInsets.only(top: 8),
+              height: 200,
+              width: size.width,
+              child: _imagePager(),
+            ),
+            // Container(width: size.width,height: 1,color: Colors.black12,),
+            Container(
+                margin: EdgeInsets.only(left: 10), child: _reactionWidget()),
+          ],
+        ),
       ),
     );
   }
@@ -334,26 +379,31 @@ class _QueAskFragmentState extends State<QueAskFragment> {
                 _clearSearchQuery();
               },
             )
-          : Container(
-              margin: EdgeInsets.only(left: 10),
-              alignment: Alignment.center,
-              width: 40,
-              height: 40,
-              child: Icon(
-                Icons.person,
-                color: Colors.black,
-              ),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: CustomColors.iconBgColor,
-              )),
+          : InkWell(
+        onTap: (){
+          _navigateToProfileScreen();
+        },
+            child: Container(
+                margin: EdgeInsets.only(left: 10),
+                alignment: Alignment.center,
+                width: 40,
+                height: 40,
+                child: Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: CustomColors.iconBgColor,
+                )),
+          ),
       title: _isSearching
           ? _buildSearchField()
           : Row(
               children: [
                 Spacer(),
                 Text(
-                  "Home",
+                  "Q&A",
                   style: TextStyle(color: Colors.black),
                 ),
                 Spacer()
@@ -425,9 +475,14 @@ class _QueAskFragmentState extends State<QueAskFragment> {
           alignment: Alignment.center,
           width: 40,
           height: 40,
-          child: Icon(
-            Icons.notifications,
-            color: Colors.black,
+          child: InkWell(
+            onTap: (){
+              _navigateToFilterScreen();
+            },
+            child: Icon(
+              Icons.filter_list,
+              color: Colors.black,
+            ),
           ),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -436,6 +491,21 @@ class _QueAskFragmentState extends State<QueAskFragment> {
         ),
       ),
     ];
+  }
+
+  _navigateToFilterScreen() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FilterScreen(),
+        ));
+  }
+  _navigateToProfileScreen() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfileScreen(),
+        ));
   }
 
   void _startSearch() {
@@ -467,4 +537,22 @@ class _QueAskFragmentState extends State<QueAskFragment> {
       updateSearchQuery("");
     });
   }
+
+  _navigateToAskDetailScreen() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AskDetailScreen(),
+        ));
+  }
+
+
+  _navigateToAScreen(Widget screenName) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => screenName,
+        ));
+  }
+
 }
